@@ -5,13 +5,13 @@ USE AirlinesSystemdb;
 DROP TABLE IF EXISTS Flight_T;
 DROP TABLE IF EXISTS Airplane_T;
 CREATE TABLE Airplane_T (
-    AirplaneID_pk INT PRIMARY KEY NOT NULL,
-	CapacityPassenger INT,
-	CapacityCargo INT,
-	Manufacturer VARCHAR(255),
-	PriceOfPlane INT ,
-	YearOfManufacturing INT
-    );
+    AirplaneID_pk INT AUTO_INCREMENT PRIMARY KEY,
+    CapacityPassenger INT,
+    CapacityCargo INT,
+    Manufacturer VARCHAR(255),
+    PriceOfPlane INT,
+    YearOfManufacturing INT
+);
         
 INSERT INTO Airplane_T (AirplaneID_pk, CapacityPassenger, CapacityCargo, Manufacturer, PriceOfPlane, YearOfManufacturing) 
 VALUES (1001, 200, 1000, 'Boeing', 100000000, 2015);
@@ -252,3 +252,31 @@ INSERT INTO Payment_T values('6802','61$','Apple Pay','999');
 INSERT INTO Payment_T values('4680','64$','card','222');
 INSERT INTO Payment_T values('0864','70$','Paypal','333');
 INSERT INTO Payment_T values('2086','64$','Apple Pay','000');
+
+
+CREATE TABLE Employees_T (
+    EmployeeID_pk INT PRIMARY KEY,
+    EmailID VARCHAR(255),
+    PositionID_fk INT,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    Contact VARCHAR(255),
+    FlightCrewID_fk INT,
+    FOREIGN KEY (PositionID_fk) REFERENCES Position_T(PositionID_pk),
+    FOREIGN KEY (FlightCrewID_fk) REFERENCES FlightCrew_T(FlightCrewID_pk)
+);
+
+
+CREATE TABLE Position_T (
+    PositionID_pk INT PRIMARY KEY,
+    PositionDescription VARCHAR(255)
+);
+
+CREATE TABLE FlightCrew_T (
+    FlightCrewID_pk INT,
+    FlightNumber INT
+);
+
+
+
+
