@@ -5,7 +5,6 @@ USE AirlinesSystemdb;
 DROP TABLE IF EXISTS Flight_T;
 DROP TABLE IF EXISTS Airplane_T;
 DROP TABLE IF EXISTS Route_T;
-DROP TABLE IF EXISTS Route_T;
 DROP TABLE IF EXISTS Flight_T;
 DROP TABLE IF EXISTS Discount_T;
 Drop table if exists Baggage_T;
@@ -20,6 +19,9 @@ DROP TABLE IF EXISTS Lounges_T;
 DROP TABLE IF EXISTS Position_T;
 DROP TABLE IF EXISTS FlightCrew_T;
 DROP TABLE IF EXISTS Employees_T;
+DROP TABLE IF EXISTS Class_T;
+Drop table if exists RepairType_T;
+Drop table if exists Maintenance_T;
 */
 CREATE TABLE Airplane_T ( 
     AirplaneID_pk INT AUTO_INCREMENT PRIMARY KEY,
@@ -105,6 +107,24 @@ CREATE TABLE BookingSource_T (
 	BookingSourceName VARCHAR(255) NOT NULL
 	);
     
+CREATE TABLE if not exists Class_T(
+    ClassId_pk Varchar(30) primary key not null,
+    ClassDesc Varchar(90) not null,
+    AminityDesc Varchar(90) not null);
+
+Create table RepairType_T(
+RepairTypeID_pk int primary key auto_increment,
+RepairDesc varchar(100));
+
+
+Create table Maintenance_T(
+MainID_pk int primary key auto_increment,
+StartTime datetime,
+EndTime datetime,
+RepairTypeID int,
+RepairCost int,
+foreign key (RepairTypeID) references RepairType_T(RepairTypeID_pk)
+);
 
 CREATE TABLE Booking_T(
 BookingId_pk INT NOT NULL,
@@ -115,13 +135,15 @@ BookingId_pk INT NOT NULL,
     Seat_No VARCHAR(30) NOT NULL,
     BookingSourceId_fk INT NOT NULL,
     BaggageId_fk INT NOT NULL,
+    ClassId_fk VARCHAR(30) NOT NULL,
     FoodId_fk INT NOT NULL,
     PaymentId_fk INT NOT NULL,
     PRIMARY KEY(BookingId_pk),
     FOREIGN KEY (BookingSourceId_fk) REFERENCES BookingSource_T(BookingSourceID_pk),
     FOREIGN KEY (FoodId_fk) REFERENCES foodchoice_t(FoodId_pk),
     FOREIGN KEY (BaggageId_fk) REFERENCES Baggage_T(BaggageID_pk),
-    FOREIGN KEY (CustomerId_fk) REFERENCES Customer_T(CustomerId_pk)
+    FOREIGN KEY (CustomerId_fk) REFERENCES Customer_T(CustomerId_pk),
+    FOREIGN KEY (ClassId_fk) REFERENCES Class_T(ClassId_pk)
     );
 
 
@@ -176,3 +198,12 @@ CREATE TABLE Employees_T (
     FOREIGN KEY (PositionID_fk) REFERENCES Position_T(PositionID_pk),
     FOREIGN KEY (FlightCrewID_fk) REFERENCES FlightCrew_T(FlightCrewID_pk)
 );
+
+
+
+
+ 
+ 
+
+
+
