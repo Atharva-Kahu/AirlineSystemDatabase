@@ -97,18 +97,25 @@ values('Keanu','Reeves','realjohnwick@kr.com',9452740001,59,'V1463096','Platinum
 ('Johnny','Depp','willywonka@choc.com',9452740007,60,'J1538096','Gold','Nashville, Tennessee'),
 ('Tom','Cruise','ethanhunt@mi.com',9452740010,61,'T1536386','Platinum','Louisville, Kentucky');
 
+SELECT * FROM Customer_T;
+
+SET FOREIGN_KEY_CHECKS=0;
+#pending
+INSERT INTO Baggage_T (Number_Bags, Weight_Bags, CustomerID) VALUES
+(2, 30, 1),
+(1, 15, 2),
+(3, 40, 3),
+(2, 35, 4),
+(1, 20, 5),
+(4, 60, 6),
+(2, 25, 7),
+(1, 10, 8),
+(3, 45, 9),
+(2, 35, 10);
 
 
-insert  into Baggage_T(Number_Bags,Weight_Bags,CustomerID) 
-values (2,38,1),
-(2,43,2),
-(3,56,3),
-(1,19,4),
-(3,62,5);
 
-
-
-insert into airport_t values (1, 'CST international airport', 'Mumbai', 'Maharashtra', 'India', '2');
+insert into airport_t values (null, 'CST international airport', 'Mumbai', 'Maharashtra', 'India', '2');
 insert into airport_t values (null,'IG international airport', 'Delhi', 'Delhi', 'India', '2');
 insert into airport_t values (null,'RG international airport', 'Hyderabad', 'Telangana', 'India', '1');
 insert into airport_t values (null,'JFK international airport', 'New York', 'New York', 'USA', '2');
@@ -123,20 +130,21 @@ insert into foodchoice_t values (null, 'Chicken Masala', 'Non-Veg', 'Tea');
 insert into foodchoice_t values (null, 'Noodles', 'Non-Veg', 'Beer');
 insert into foodchoice_t values (null, 'Sandwitch', 'Veg', 'Juice');
 
+#pending
+INSERT INTO Booking_T (BookingId_pk, FlightNo, Date_Of_Travel, CustomerId_fk, SeatCatogary, Seat_No, BookingSourceId_fk, BaggageId_fk, ClassId_fk, FoodId_fk, PaymentId_fk) VALUES
+(1, 12345, '2023-11-01', 301, 'Economy', 'A1', 201, 1, 'Economy', 1, 401),
+(2, 54321, '2023-11-02', 302, 'Business', 'B2', 202, 2, 'Business', 2, 402),
+(3, 67890, '2023-11-03', 303, 'First Class', 'C3', 203, 3, 'First Class', 3, 403),
+(4, 98765, '2023-11-04', 304, 'Economy', 'D4', 204, 4, 'Economy', 4, 404),
+(5, 23456, '2023-11-05', 305, 'Business', 'E5', 205, 5, 'Business', 5, 405),
+(6, 34567, '2023-11-06', 306, 'First Class', 'F6', 206, 6, 'First Class', 6, 406),
+(7, 45678, '2023-11-07', 307, 'Economy', 'G7', 207, 7, 'Economy', 7, 407),
+(8, 87654, '2023-11-08', 308, 'Business', 'H8', 208, 8, 'Business', 8, 408),
+(9, 76543, '2023-11-09', 309, 'First Class', 'I9', 209, 9, 'First Class', 9, 409),
+(10, 9876, '2023-11-10', 310, 'Economy', 'J10', 210, 10, 'Economy', 10, 410);
 
-insert into Booking_T values('134567','111','5-30-2023','4050','ECONOMY','H1','1001','001','1','00031');
-insert into Booking_T values('009782','121','8-22-2023','7676','ECONOMY','C6','1002','002','2','00042');
-insert into Booking_T values('450789','131','8-22-2023','1918','ECONOMY','C2','1003','003','3','00056');
-insert into Booking_T values('664983','141','3-27-2023','1010','ECONOMY','I4','1004','004','4','00091');
-insert into Booking_T values('300700','151','6-29-2023','0044','BUSINESS','B02','1005','005','10','00064');
-insert into Booking_T values('111102','161','10-03-2023','5566','ECONOMY','A2','1006','006','5','00037');
-insert into Booking_T values('747439','171','2-15-2023','9900','BUSINESS','B04','1007','007','11','00022');
-insert into Booking_T values('413908','181','7-01-2023','3388','ECONOMY','E3','1008','008','6','00011');
-insert into Booking_T values('300701','191','12-23-2023','1313','FIRST','F01','1009','009','20','00047');
-insert into Booking_T values('783406','221','11-13-2023','0099','BUSINESS','F5','1010','010','7','00072');
 
-
-
+#pending
 INSERT INTO Payment_T values('1357','70$','card','777');
 INSERT INTO Payment_T values('7913','64$','card','111');
 INSERT INTO Payment_T values('5791','81$','Paypal','444');
@@ -149,22 +157,28 @@ INSERT INTO Payment_T values('0864','70$','Paypal','333');
 INSERT INTO Payment_T values('2086','64$','Apple Pay','000');
 
 
-INSERT INTO Cargo_T VALUES
-(21, 121, 1000, 1357, NULL),
-(33, 131, 750, NULL, NULL),
-(38, 141, 253, 5791, NULL),
-(45, 151, 1244, 3579, NULL),
-(55, 161, 369, 2468, NULL),
-(68, 221, 875, NULL, NULL),
-(61, 223, 654, 246, NULL),
-(72, 226, 1345, 4680, NULL),
-(44, 228, 550, 864, NULL),
-(28, 100, 1500, 2086, NULL),
-(14, 200, 624, 6802, NULL),
-(15, 225, 100, NULL, NULL),
-(56, 191, 150, 7913, NULL),
-(87, 111, 310, NULL, NULL),
-(24, 227, 750, NULL, NULL);
+CREATE TABLE IF NOT EXISTS Cargo_T(
+    CargoID_pk INT,
+    FlightNo INT,
+    Weight DECIMAL(10, 2),
+    PaymentID_fk INT,
+    CustomerID INT,
+    PRIMARY KEY(CargoID_pk),
+    FOREIGN KEY(PaymentID_fk) REFERENCES Payment_T(PaymentID_pk),
+    FOREIGN KEY(FlightNo) REFERENCES Flight_T(FlightNo_pk)
+);
+#p
+INSERT INTO Cargo_T (CargoID_pk, FlightNo, Weight, PaymentID, CustomerID) VALUES
+(1, 12345, 100.50, 101, 201),
+(2, 54321, 75.25, 102, 202),
+(3, 67890, 50.75, 103, 203),
+(4, 98765, 200.00, 104, 204),
+(5, 23456, 150.25, 105, 205),
+(6, 34567, 80.00, 106, 206),
+(7, 45678, 120.75, 107, 207),
+(8, 87654, 90.50, 108, 208),
+(9, 76543, 110.25, 109, 209),
+(10, 9876, 160.00, 110, 210);
 
 
 insert into Lounges_T values(1, 'Adani Lounge');
