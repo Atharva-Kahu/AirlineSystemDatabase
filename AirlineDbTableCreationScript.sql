@@ -200,6 +200,19 @@ CREATE TABLE Employees_T (
 );
 
 
+update airport_t set AirportCity = 'BOM' where AirportId_pk = '1';
+update airport_t set AirportCity = 'DEL' where AirportId_pk = '2';
+update airport_t set AirportCity = 'HYD' where AirportId_pk = '3';
+update airport_t set AirportCity = 'JFK' where AirportId_pk = '4';
+update airport_t set AirportCity = 'DFW' where AirportId_pk = '5';
+update airport_t set AirportCity = 'DXB' where AirportId_pk = '6';
+update airport_t set AirportCity = 'SIN' where AirportId_pk = '7';
+
+create table airportcity_T  (
+    Abbreviation VARCHAR(3) NOT NULL,
+    CityName VARCHAR(255) NOT NULL,
+    PRIMARY KEY (Abbreviation)
+);
 
 
  

@@ -90,38 +90,50 @@ INSERT INTO BookingSource_T  VALUES (1008, 'Priceline');
 INSERT INTO BookingSource_T  VALUES (1009, 'Orbitz');
 INSERT INTO BookingSource_T  VALUES (1010, 'Travelocity');
 
-insert into Customer_T(Cust_First_Name,Cust_Last_Name,Cust_EmailID,Cust_Phone,Cust_age,PassportNo,Membership_Stat,Cust_Address)
-values('Keanu','Reeves','realjohnwick@kr.com',9452740001,59,'V1463096','Platinum','Los Angeles, California'),
-('Leonardo','DiCaprio','wolfofthewallstreet@ld.com',9452740018,48,'C1474096','Gold','Los Angeles, California'),
-('Robert','Downey','ironman@avengers.com',9452740045,58,'R1466696','Silver','Malibu, California'),
-('Johnny','Depp','willywonka@choc.com',9452740007,60,'J1538096','Gold','Nashville, Tennessee'),
-('Tom','Cruise','ethanhunt@mi.com',9452740010,61,'T1536386','Platinum','Louisville, Kentucky');
+DELETE FROM Customer_T;
+insert into Customer_T(CustomerID_pk,Cust_First_Name,Cust_Last_Name,Cust_EmailID,Cust_Phone,Cust_age,PassportNo,Membership_Stat,Cust_Address)
+values(201,'Keanu','Reeves','realjohnwick@kr.com',9452740001,59,'V1463096','Platinum','Los Angeles, California'),
+(202,'Leonardo','DiCaprio','wolfofthewallstreet@ld.com',9452740018,48,'C1474096','Gold','Los Angeles, California'),
+(203,'Robert','Downey','ironman@avengers.com',9452740045,58,'R1466696','Silver','Malibu, California'),
+(204,'Johnny','Depp','willywonka@choc.com',9452740007,60,'J1538096','Gold','Nashville, Tennessee'),
+(205,'Tom','Cruise','ethanhunt@mi.com',9452740010,61,'T1536386','Platinum','Louisville, Kentucky');
 
 SELECT * FROM Customer_T;
 
 SET FOREIGN_KEY_CHECKS=0;
 #pending
-INSERT INTO Baggage_T (Number_Bags, Weight_Bags, CustomerID) VALUES
-(2, 30, 1),
-(1, 15, 2),
-(3, 40, 3),
-(2, 35, 4),
-(1, 20, 5),
-(4, 60, 6),
-(2, 25, 7),
-(1, 10, 8),
-(3, 45, 9),
-(2, 35, 10);
+delete FROM Baggage_T;
+INSERT INTO Baggage_T (BaggageID_pk,Number_Bags, Weight_Bags, CustomerID) VALUES
+(1,2, 30, 1),
+(2,1, 15, 2),
+(3,3, 40, 3),
+(4,2, 35, 4),
+(5,1, 20, 5),
+(6,4, 60, 6),
+(7,2, 25, 7),
+(8,1, 10, 8),
+(9,3, 45, 9),
+(10,2, 35, 10);
 
 
 
-insert into airport_t values (null, 'CST international airport', 'Mumbai', 'Maharashtra', 'India', '2');
-insert into airport_t values (null,'IG international airport', 'Delhi', 'Delhi', 'India', '2');
-insert into airport_t values (null,'RG international airport', 'Hyderabad', 'Telangana', 'India', '1');
-insert into airport_t values (null,'JFK international airport', 'New York', 'New York', 'USA', '2');
-insert into airport_t values (null,'DFW international airport', 'Dallas', 'Texas', 'USA', '2');
-insert into airport_t values (null,'Dubai international airport', 'Dubai', 'Dubai', 'UAE', '2');
-insert into airport_t values (null,'Changi international airport', 'Singapore', 'Singapore', 'Singapore', '2');
+insert into airport_t values (null, 'Los Angeles International Airport', 'LAX', 'California', 'USA', '4', '2');
+insert into airport_t values (null, "O'Hare International Airport ", 'ORD', 'Illinois', 'USA', '7', '4');
+insert into airport_t values (null, 'Miami International Airport', 'MIA', 'Florida', 'USA', '4', '3');
+insert into airport_t values (null, 'Boston Logan International Airpor', 'BOS', 'Massachusetts', 'USA', '6', '1');
+insert into airport_t values (null, 'San Francisco International Airport', 'SFO', 'California', 'USA', '4', '4');
+insert into airport_t values (null, 'Denver International Airport', 'DEN', 'Colorado', 'USA', '6', '1');
+ 
+insert into airport_t values (null, 'Seattle-Tacoma International Airport', 'SEA', 'Washington', 'USA', '3', '2');
+insert into airport_t values (null, 'Hartsfield-Jackson Atlanta International Airport', 'ATL', 'Georgia', 'USA', '5', '4');
+insert into airport_t values (null, 'McCarran International Airport', 'LAS', 'Nevada', 'USA', '3', '3');
+insert into airport_t values (null, 'Ronald Reagan Washington National Airport', 'DCA', 'District of Columbia (D.C.)', 'USA', '6', '2');
+insert into airport_t values (null, 'George Bush Intercontinental Airport', 'IAH', 'Texas', 'USA', '5', '1');
+insert into airport_t values (null, 'Orlando International Airport', 'MCO', 'Florida', 'USA', '4', '4');
+ 
+insert into airport_t values (null, 'Phoenix Sky Harbor International Airport', 'PHX', 'Arizona', 'USA', '5', '4');
+insert into airport_t values (null, 'Louis Armstrong New Orleans International Airport', 'MSY', 'Louisiana', 'USA', '4', '3');
+insert into airport_t values (null, 'San Diego International Airport', 'SAN', 'California', 'USA', '5', '4');
 
 
 insert into foodchoice_t values (1, 'Pasta', 'Veg', 'Soft Drinks');
@@ -143,6 +155,9 @@ INSERT INTO Booking_T (BookingId_pk, FlightNo, Date_Of_Travel, CustomerId_fk, Se
 (9, 76543, '2023-11-09', 309, 'First Class', 'I9', 209, 9, 'First Class', 9, 409),
 (10, 9876, '2023-11-10', 310, 'Economy', 'J10', 210, 10, 'Economy', 10, 410);
 
+#class_T
+#RepairT
+#MaintainanceT
 
 #pending
 INSERT INTO Payment_T values('1357','70$','card','777');
@@ -157,16 +172,6 @@ INSERT INTO Payment_T values('0864','70$','Paypal','333');
 INSERT INTO Payment_T values('2086','64$','Apple Pay','000');
 
 
-CREATE TABLE IF NOT EXISTS Cargo_T(
-    CargoID_pk INT,
-    FlightNo INT,
-    Weight DECIMAL(10, 2),
-    PaymentID_fk INT,
-    CustomerID INT,
-    PRIMARY KEY(CargoID_pk),
-    FOREIGN KEY(PaymentID_fk) REFERENCES Payment_T(PaymentID_pk),
-    FOREIGN KEY(FlightNo) REFERENCES Flight_T(FlightNo_pk)
-);
 #p
 INSERT INTO Cargo_T (CargoID_pk, FlightNo, Weight, PaymentID, CustomerID) VALUES
 (1, 12345, 100.50, 101, 201),
@@ -195,6 +200,59 @@ update airport_t set LoungeId = '1' where AirportId_pk = '5';
 update airport_t set LoungeId = '2' where AirportId_pk = '6';
 update airport_t set LoungeId = '3' where AirportId_pk = '7';
 
+INSERT INTO airportCity (Abbreviation, CityName) VALUES
+    ('BOM', 'Mumbai'),
+    ('DEL', 'Delhi'),
+    ('HYD', 'Hyderabad'),
+    ('DXB', 'Dubai'),
+    ('SIN', 'Singapore'),
+    ('JFK', 'New York City'),
+    ('LAX', 'Los Angeles'),
+    ('SFO', 'San Francisco'),
+    ('ORD', 'Chicago'),
+    ('MIA', 'Miami'),
+    ('DFW', 'Dallas-Fort Worth'),
+    ('LAS', 'Las Vegas'),
+    ('DEN', 'Denver'),
+    ('ATL', 'Atlanta'),
+    ('BOS', 'Boston'),
+    ('SEA', 'Seattle'),
+    ('PHX', 'Phoenix'),
+    ('DCA', 'Washington, D.C.'),
+    ('IAH', 'Houston'),
+    ('MCO', 'Orlando'),
+    ('MSY', 'New Orleans'),
+    ('SAN', 'San Diego'),
+    ('MSP', 'Minneapolis'),
+    ('SJC', 'San Jose'),
+    ('PDX', 'Portland'),
+    ('STL', 'St. Louis');
 
 
+INSERT INTO Position_T (PositionID_pk, PositionDescription) VALUES
+(1, 'Pilot'),
+(2, 'Co-Pilot'),
+(3, 'Flight Attendant'),
+(4, 'Flight Engineer'),
+(5, 'Air Traffic Controller');
 
+-- Data for FlightCrew_T table
+INSERT INTO FlightCrew_T (FlightCrewID_pk, FlightNumber) VALUES
+(101, 1234),
+(102, 5678),
+(103, 4321),
+(104, 8765),
+(105, 9876);
+
+-- Data for Employees_T table
+INSERT INTO Employees_T (EmployeeID_pk, EmailID, PositionID_fk, FirstName, LastName, Contact, FlightCrewID_fk) VALUES
+(1001, 'john@example.com', 1, 'John', 'Doe', '123-456-7890', 101),
+(1002, 'jane@example.com', 3, 'Jane', 'Smith', '234-567-8901', 103),
+(1003, 'mike@example.com', 2, 'Mike', 'Johnson', '345-678-9012', 102),
+(1004, 'sara@example.com', 4, 'Sara', 'Williams', '456-789-0123', 104),
+(1005, 'chris@example.com', 5, 'Chris', 'Brown', '567-890-1234', 105),
+(1006, 'emily@example.com', 1, 'Emily', 'Taylor', '678-901-2345', 101),
+(1007, 'alex@example.com', 2, 'Alex', 'Anderson', '789-012-3456', 102),
+(1008, 'laura@example.com', 3, 'Laura', 'Martin', '890-123-4567', 103),
+(1009, 'peter@example.com', 4, 'Peter', 'White', '901-234-5678', 104),
+(1010, 'olivia@example.com', 5, 'Olivia', 'Lee', '012-345-6789', 105);
