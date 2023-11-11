@@ -256,3 +256,61 @@ INSERT INTO Employees_T (EmployeeID_pk, EmailID, PositionID_fk, FirstName, LastN
 (1008, 'laura@example.com', 3, 'Laura', 'Martin', '890-123-4567', 103),
 (1009, 'peter@example.com', 4, 'Peter', 'White', '901-234-5678', 104),
 (1010, 'olivia@example.com', 5, 'Olivia', 'Lee', '012-345-6789', 105);
+
+
+update airport_t set AirportCity = 'BOM' where AirportId_pk = '1';
+update airport_t set AirportCity = 'DEL' where AirportId_pk = '2';
+update airport_t set AirportCity = 'HYD' where AirportId_pk = '3';
+update airport_t set AirportCity = 'JFK' where AirportId_pk = '4';
+update airport_t set AirportCity = 'DFW' where AirportId_pk = '5';
+update airport_t set AirportCity = 'DXB' where AirportId_pk = '6';
+update airport_t set AirportCity = 'SIN' where AirportId_pk = '7';
+
+
+ 
+insert into airport_t values (null, 'Los Angeles International Airport', 'LAX', 'California', 'USA', '4', '2');
+insert into airport_t values (null, "O'Hare International Airport ", 'ORD', 'Illinois', 'USA', '7', '4');
+insert into airport_t values (null, 'Miami International Airport', 'MIA', 'Florida', 'USA', '4', '3');
+insert into airport_t values (null, 'Boston Logan International Airpor', 'BOS', 'Massachusetts', 'USA', '6', '1');
+insert into airport_t values (null, 'San Francisco International Airport', 'SFO', 'California', 'USA', '4', '4');
+insert into airport_t values (null, 'Denver International Airport', 'DEN', 'Colorado', 'USA', '6', '1');
+ 
+insert into airport_t values (null, 'Seattle-Tacoma International Airport', 'SEA', 'Washington', 'USA', '3', '2');
+insert into airport_t values (null, 'Hartsfield-Jackson Atlanta International Airport', 'ATL', 'Georgia', 'USA', '5', '4');
+insert into airport_t values (null, 'McCarran International Airport', 'LAS', 'Nevada', 'USA', '3', '3');
+insert into airport_t values (null, 'Ronald Reagan Washington National Airport', 'DCA', 'District of Columbia (D.C.)', 'USA', '6', '2');
+insert into airport_t values (null, 'George Bush Intercontinental Airport', 'IAH', 'Texas', 'USA', '5', '1');
+insert into airport_t values (null, 'Orlando International Airport', 'MCO', 'Florida', 'USA', '4', '4');
+ 
+insert into airport_t values (null, 'Phoenix Sky Harbor International Airport', 'PHX', 'Arizona', 'USA', '5', '4');
+insert into airport_t values (null, 'Louis Armstrong New Orleans International Airport', 'MSY', 'Louisiana', 'USA', '4', '3');
+insert into airport_t values (null, 'San Diego International Airport', 'SAN', 'California', 'USA', '5', '4');
+
+
+INSERT INTO airportCity (Abbreviation, CityName) VALUES
+    ('BOM', 'Mumbai'),
+    ('DEL', 'Delhi'),
+    ('HYD', 'Hyderabad'),
+    ('DXB', 'Dubai'),
+    ('SIN', 'Singapore'),
+    ('JFK', 'New York City'),
+    ('LAX', 'Los Angeles'),
+    ('SFO', 'San Francisco'),
+    ('ORD', 'Chicago'),
+    ('MIA', 'Miami'),
+    ('DFW', 'Dallas-Fort Worth'),
+    ('LAS', 'Las Vegas'),
+    ('DEN', 'Denver'),
+    ('ATL', 'Atlanta'),
+    ('BOS', 'Boston'),
+    ('SEA', 'Seattle'),
+    ('PHX', 'Phoenix'),
+    ('DCA', 'Washington, D.C.'),
+    ('IAH', 'Houston'),
+    ('MCO', 'Orlando'),
+    ('MSY', 'New Orleans'),
+    ('SAN', 'San Diego'),
+    ('MSP', 'Minneapolis'),
+    ('SJC', 'San Jose'),
+    ('PDX', 'Portland'),
+    ('STL', 'St. Louis');
