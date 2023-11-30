@@ -33,13 +33,20 @@ CREATE TABLE Airplane_T (
 );
 
 
+create table airportcity_T  (
+    Abbreviation VARCHAR(3) NOT NULL,
+    CityName VARCHAR(255) NOT NULL,
+    PRIMARY KEY (Abbreviation)
+);
 
 CREATE TABLE Route_T (
     RouteID_pk VARCHAR(6),
     SourceID VARCHAR(25),
     DestinationID VARCHAR(25),
     Distance INT,
-    PRIMARY KEY(RouteID_pk)
+    PRIMARY KEY(RouteID_pk),
+    foreign key (SourceID) references AirportCity_T(Abbreviation),
+    foreign key (DestinationID) references AirportCity_T(Abbreviation)
     );
 
 CREATE TABLE IF NOT EXISTS Flight_T (
@@ -84,6 +91,9 @@ foreign key (CustomerID) references Customer_T(CustomerID_pk)
 );
 
 
+create table Lounges_T (
+LoungeId int  primary key,
+LoungeName varchar(100) not null);
 
 create table Airport_T (
 AirportId_pk int primary key not null auto_increment,
@@ -91,7 +101,10 @@ AirportName varchar(100) not null,
 AirportCity varchar(100) not null,
 AirportState varchar(100) not null,
 AirportCountry varchar(100) not null,
-AirportStripsNo int not null);
+AirportStripsNo int not null,
+LoungeID INT,
+foreign key (AirportCity) references AirportCity_T(Abbreviation),
+foreign key (LoungeId) references Lounges_T (LoungeId));
 
 
 create table FoodChoice_T (
@@ -126,37 +139,38 @@ RepairCost int,
 foreign key (RepairTypeID) references RepairType_T(RepairTypeID_pk)
 );
 
+
+CREATE TABLE IF NOT EXISTS Payment_T(
+	PaymentId_pk int not null,
+    Amount int not null,
+    Type_Of_Payment varchar(30) not null,
+    DiscountId_fk VARCHAR(10),
+    primary key(PaymentId_pk),
+    FOREIGN KEY (DiscountId_fk) REFERENCES Discount_t(Code_pk)
+    );
+
+
 CREATE TABLE Booking_T(
-BookingId_pk INT NOT NULL,
-    FlightNo INT NOT NULL,
+	BookingId_pk INT NOT NULL,
+    FlightNo_fk INT NOT NULL,
     Date_Of_Travel VARCHAR(30) NOT NULL,
     CustomerId_fk INT NOT NULL,
-    SeatCatogary VARCHAR(30) NOT NULL,
     Seat_No VARCHAR(30) NOT NULL,
     BookingSourceId_fk INT NOT NULL,
-    BaggageId_fk INT NOT NULL,
     ClassId_fk VARCHAR(30) NOT NULL,
     FoodId_fk INT NOT NULL,
     PaymentId_fk INT NOT NULL,
     PRIMARY KEY(BookingId_pk),
+    Foreign Key (FlightNo_fk) references Flight_T(FlightNo_pk),
     FOREIGN KEY (BookingSourceId_fk) REFERENCES BookingSource_T(BookingSourceID_pk),
     FOREIGN KEY (FoodId_fk) REFERENCES foodchoice_t(FoodId_pk),
-    FOREIGN KEY (BaggageId_fk) REFERENCES Baggage_T(BaggageID_pk),
     FOREIGN KEY (CustomerId_fk) REFERENCES Customer_T(CustomerId_pk),
-    FOREIGN KEY (ClassId_fk) REFERENCES Class_T(ClassId_pk)
+    FOREIGN KEY (ClassId_fk) REFERENCES Class_T(ClassId_pk),
+    foreign key (PaymentID_fk) references Payment_T(PaymentId_pk)
     );
 
+    
 
-CREATE TABLE IF NOT EXISTS Payment_T(
-PaymentId_pk int not null,
-    Amount varchar(50) not null,
-    Type_Of_Payment varchar(30) not null,
-    DiscountId_fk VARCHAR(10) Not Null,
-    primary key(PaymentId_pk),
-    FOREIGN KEY (DiscountId_fk) REFERENCES Discount_t(Code_pk)
-    );
-    
-    
 CREATE TABLE IF NOT EXISTS Cargo_T(
     CargoID_pk INT,
     FlightNo INT,
@@ -169,12 +183,7 @@ CREATE TABLE IF NOT EXISTS Cargo_T(
 );
 
 
-create table Lounges_T (
-LoungeId int not null primary key,
-LoungeName varchar(100) not null
-);
-ALTER TABLE airport_t ADD COLUMN LoungeId INT;
-Alter table airport_t add foreign key (LoungeId) references Lounges_T (LoungeId);
+
 
 
 CREATE TABLE Position_T (
@@ -200,19 +209,14 @@ CREATE TABLE Employees_T (
 );
 
 
-update airport_t set AirportCity = 'BOM' where AirportId_pk = '1';
-update airport_t set AirportCity = 'DEL' where AirportId_pk = '2';
-update airport_t set AirportCity = 'HYD' where AirportId_pk = '3';
-update airport_t set AirportCity = 'JFK' where AirportId_pk = '4';
-update airport_t set AirportCity = 'DFW' where AirportId_pk = '5';
-update airport_t set AirportCity = 'DXB' where AirportId_pk = '6';
-update airport_t set AirportCity = 'SIN' where AirportId_pk = '7';
+#update airport_t set AirportCity = 'BOM' where AirportId_pk = '1';
+#update airport_t set AirportCity = 'DEL' where AirportId_pk = '2';
+#update airport_t set AirportCity = 'HYD' where AirportId_pk = '3';
+#update airport_t set AirportCity = 'JFK' where AirportId_pk = '4';
+#update airport_t set AirportCity = 'DFW' where AirportId_pk = '5';
+#update airport_t set AirportCity = 'DXB' where AirportId_pk = '6';
+#update airport_t set AirportCity = 'SIN' where AirportId_pk = '7';
 
-create table airportcity_T  (
-    Abbreviation VARCHAR(3) NOT NULL,
-    CityName VARCHAR(255) NOT NULL,
-    PRIMARY KEY (Abbreviation)
-);
 
 
  
